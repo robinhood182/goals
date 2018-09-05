@@ -5,7 +5,7 @@ const tokenService = require('../auth/token-service');
 
 function hasEmailAndPassword(req, res, next) {
     const user = req.body;
-    if(!user || !user.email || user.password) {
+    if(!user || !user.email || !user.password) {
         return next({
             code: 400,
             error: 'Must provide email and password'
