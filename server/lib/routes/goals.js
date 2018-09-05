@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Goal = require('../models/goal');
 const User = require('../models/user');
 const ensureAuth = require('../auth/ensure-auth')();
-const { getParam, respond } = require('../utils/route-helpers');
+const respond = require('../utils/route-helpers');
 const updateOptions = {
     new: true,
     runValidators: true
@@ -10,8 +10,6 @@ const updateOptions = {
 
 
 module.exports = router 
-
-    .param('id', getParam)
 
     .post('/', ensureAuth, (req, res, next) => {
         Goal.create(req.body)
@@ -26,15 +24,40 @@ module.exports = router
             .catch(next);
     })
 
-    .put('/:id', ensureAuth, respond(
-        ({ id, body }) => Goal.updateById(id, body)
-    ))
+    .put('/', ensureAuth, (req, res, next) => {
+        Goal.findByIdAndUpdate(
+            req.user.id,
+            req.body,
+            updateOptions
+        )
+            .then(body => res.json(body))
+            .catch(next);
+    })
 
-    .get('/', respond(() => Goal.find()
-        .lean()
-        .limit(25)        
-    ))
+    .get('/', (req, res, next) => {
+        Goal.find()
+            .lean()
+            .then(goals => res.json(goals))
+            .catch(next);
+    })
 
-    .get('/:id', respond(
-        ({ id }) => Goal.findById(id).lean()
-    ));
+    .get('/', (req, res, next) => {
+        Goal.findById(req.user.id)
+            .lean()
+            .then(goal => res.json(goal))
+            .catch(next);
+    });
+
+
+    // .post('/', ensureAuth, (req, res, next) => {
+    //     Goal.create(req.body)
+    //         .then(goal => {
+    //             User.findByIdAndUpdate(
+    //                 goal.author,
+    //                 {$push: { goals: goal } },
+    //                 updateOptions
+    //             )
+    //                 .then(body => res.json(body));
+    //         })
+    //         .catch(next);
+    // })

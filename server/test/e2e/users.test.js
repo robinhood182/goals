@@ -2,11 +2,10 @@ const { assert } = require('chai');
 const request = require('../request');
 const { dropCollection } = require('../db');
 
-describe('Users API', () => {
+describe.skip('Users API', () => {
 
     let user;
     let token;
-    let goal1;
 
     beforeEach(() => dropCollection('goals'));
     beforeEach(() => dropCollection('users'));
