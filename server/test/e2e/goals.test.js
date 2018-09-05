@@ -24,7 +24,7 @@ describe('Goals API', () => {
             .then(({ body }) => token = body.token);
     });
 
-    it('saves a goal', () => {
+    beforeEach(() => {
         return request
             .post('/api/goals')
             .set('Authorization', token)
@@ -32,11 +32,30 @@ describe('Goals API', () => {
             .then(({ body }) => {
                 const { _id, __v } = body;
                 assert.deepEqual(body, {
-                  ...goal1, // eslint-disable-next-line
-                  _id, __v
+                    ...goal1,
+                    _id, __v
                 });
                 goal1 = body;
-                console.log(goal1);
-            })
+            });
+    });
+
+    it('saves a goal', () => {
+        assert.ok(goal1);
+    });
+
+    it('gets goals', () => {
+        return request  
+            .get('/api/goals')
+            .then(({ body }) => {
+                assert.deepEqual(body, [goal1] );
+            });
+    });
+
+    it('gets goals by id', () => {
+        return request  
+            .get(`/api/goals/${goal1._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, goal1);
+            });
     });
 });
