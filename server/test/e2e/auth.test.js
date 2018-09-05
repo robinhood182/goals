@@ -42,4 +42,13 @@ describe('Auth Api', () => {
     it('singup', () => {
         assert.ok(tokenOne);
     });
+
+    it('verifies', () => {
+        return request
+            .get('/api/auth/verify')
+            .set('Authorization', tokenOne)
+            .then(({ body }) => {
+                assert.isOk(body.valid);
+            });
+    });
 });
