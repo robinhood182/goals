@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const errorHandler = require('./utils/error-handler');
+require('./models/register-plugins');
+
 // const ensureAuth = require('./auth/ensure-auth')();
 
 app.use(morgan('dev'));

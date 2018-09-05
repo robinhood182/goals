@@ -1,25 +1,26 @@
 const router = require('express').Router();
 const Goal = require('../models/goal');
 const ensureAuth = require('../auth/ensure-auth')();
+const { getParam, respond } = require('../utils/route-helpers');
 
 
 module.exports = router 
-    .post('/', ensureAuth, (req, res, next) => {
-        Goal.create(req.body)
-            .then(goal => res.json(goal))
-            .catch(next);
-    })
 
-    .get('/', (req, res, next) => {
-        Goal.find()
-            .lean()
-            .then(goals => res.json(goals))
-            .catch(next);
-    })
+    .param('id', getParam)
 
-    .get('/:id', (req, res, next) => {
-        Goal.findById(req.params.id)
-            .lean()
-            .then(goal => res.json(goal))
-            .catch(next);
-    });
+    .post('/', ensureAuth, respond(
+        ({ body }) => Goal.create(body)
+    ))
+
+    .put('/:id', ensureAuth, respond(
+        ({ id, body }) => Goal.updateById(id, body)
+    ))
+
+    .get('/', respond(() => Goal.find()
+        .lean()
+        .limit(25)        
+    ))
+
+    .get('/:id', respond(
+        ({ id }) => Goal.findById(id).lean()
+    ));

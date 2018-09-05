@@ -58,4 +58,15 @@ describe('Goals API', () => {
                 assert.deepEqual(body, goal1);
             });
     });
+
+    it('updates a goal', () => {
+        goal1.completed = true;
+        return request  
+            .put(`/api/goals/${goal1._id}`)
+            .set('Authorization', token)
+            .send(goal1)
+            .then(({ body }) => {
+                assert.equal(body.completed, true);
+            });
+    });
 });
