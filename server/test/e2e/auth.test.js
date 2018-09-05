@@ -8,11 +8,11 @@ const userOne = {
     password: '12345678'
 };
 
-const userTwo = {
-    name: 'Robyn',
-    email: 'robyn@stef.com',
-    password: '12345678'
-};
+// const userTwo = {
+//     name: 'Robyn',
+//     email: 'robyn@stef.com',
+//     password: '12345678'
+// };
 
 const badPassword = {
     name: 'Robyn',
@@ -27,7 +27,7 @@ const badEmail = {
 };
 
 let tokenOne;
-let tokenTwo;
+// let tokenTwo;
 
 describe('Auth Api', () => {
     beforeEach(() => dropCollection('users'));
@@ -51,4 +51,44 @@ describe('Auth Api', () => {
                 assert.isOk(body.valid);
             });
     });
+
+    it('signin', () => {
+        return request
+            .post('/api/auth/signin')
+            .send(userOne)
+            .then(({ body }) => {
+                assert.ok(body.token);
+            });
+    });
+
+    xit('Gives 400 on signup of same email', () => {
+        return request
+            .post('/api/auth/signup')
+            .send(userOne)
+            .then(res => {
+                assert.equal(res.status, 400);
+                assert.equal(res.body.error, 'email already in use');
+            });
+    });
+
+    xit('Gives 401 on non-existent email', () => {
+        return request
+            .post('/api/auth/signin')
+            .send(badEmail)
+            .then(res => {
+                assert.equal(res.status, 401);
+                assert.equal(res.body.error, 'Invalid Login');
+            });
+    });
+
+    xit('Gives 401 on bad password', () => {
+        return request
+            .post('/api/auth/signin')
+            .send(badPassword)
+            .then(res => {
+                assert.equal(res.status, 401);
+                assert.equal(res.body.error, 'Invalid Login');
+            });
+    });
+
 });

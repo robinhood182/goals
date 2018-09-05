@@ -25,7 +25,7 @@ router
 
         User.exists({ email })
             .then(exists => {
-                if(exists) { throw { code: 400, error: 'email already in use'}; }
+                if(exists) { throw { code: 400, error: 'email already in use' }; }
                 const user = new User({ name, email });
                 user.generateHash(password);
                 return user.save();

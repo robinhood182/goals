@@ -19,7 +19,9 @@ module.exports = function createErrorHandler(log = console.log) {
             code = 400;
             error = Object.values(err.errors).map(e => e.message);
         }
-        else showLog = true;
+        else {
+            showLog = true;
+        }
 
         if(showLog) log(code, error);
 
