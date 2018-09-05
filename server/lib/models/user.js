@@ -10,7 +10,11 @@ const RequiredString = {
 const schema = new Schema({
     name: RequiredString,
     email: RequiredString,
-    hash: RequiredString
+    hash: RequiredString,
+    goals: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Goal'
+    }]
 });
 
 schema.static('exists', function (query) {

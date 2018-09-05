@@ -33,7 +33,8 @@ router
             .then(user => Promise.all([user, tokenService.sign(user)]))
             .then(([user, token]) => res.send({
                 token,
-                name: user.name
+                name: user.name,
+                _id: user.id
             }))
             .catch(next);
     })
@@ -52,7 +53,8 @@ router
             .then(user => Promise.all([user, tokenService.sign(user)]))
             .then(([user, token]) => res.send({
                 token,
-                name: user.name
+                name: user.name,
+                _id: user.id
             }))
             .catch(next);
     });

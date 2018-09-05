@@ -9,6 +9,11 @@ const schema = new Schema({
     completed: {
         type: Boolean,
         required: true
+    },
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     }
 });
 
