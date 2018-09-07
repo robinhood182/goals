@@ -6,7 +6,7 @@ export class Home extends Component {
     return (
       <div className={styles.home}>
         <h2>Don&apos;t let your dreams be dreams...</h2>
-        <p>If you&apos;re tired of starting over, stop giving up.</p>
+        <p><cite>If you&apos;re tired of starting over, stop giving up.</cite> -Shia LaBeouf</p>
       </div>
     );
   }
