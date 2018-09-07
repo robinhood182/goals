@@ -2,7 +2,7 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 
-const buildDir = 'docs';
+const buildDir = 'build';
 const path = `${__dirname}/${buildDir}`;
 
 module.exports = {
