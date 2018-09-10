@@ -7,6 +7,7 @@ import { getCheckedAuth } from '../auth/reducers';
 import Home from './Home';
 import Header from './Header';
 import Auth from '../auth/Auth';
+import Goals from '../goals/Goals';
 import styles from './App.css';
 
 class App extends PureComponent {
@@ -32,6 +33,7 @@ class App extends PureComponent {
             <Switch>
               <Route exact path="/" component={Home}/>
               <Route path="/auth" component={Auth}/>
+              <Route exact path="/goals" component={Goals}/>
               <Redirect to="/"/>
             </Switch>
             }
