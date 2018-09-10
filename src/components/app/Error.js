@@ -1,12 +1,12 @@
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getError } from './reducers';
 import { clearError } from './actions';
 // import styles from './Error.css';
 
-export class Error extends Component {
+export class Error extends PureComponent {
   
   static propTypes = {
     error: PropTypes.any,
@@ -19,16 +19,17 @@ export class Error extends Component {
     if(error) {
       setTimeout(() => {
         clearError();
-      }, 10000);
+      }, 7000);
     }
   }
 
   render() { 
     const { error } = this.props;
     if(!error) return null;
+    const currentError = error.error || error.message || error.errors;
 
     return (
-      <pre>{error}</pre>
+      <pre>{currentError}</pre>
     );
   }
 }

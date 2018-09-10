@@ -12,9 +12,8 @@ class User extends PureComponent {
 
     return (
       <li className={styles.user}>
-        <p>{user.name}</p>
         <section className="completed-container">
-          <p className="completed">{user.completed} of {user.total}</p>
+          <p className="completed">{user.name} has completed {user.completed} out of {user.total} goals.</p>
         </section>
       </li>
     );
