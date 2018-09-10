@@ -11,7 +11,7 @@ export const signin = credentials => post(SIGNIN_URL, credentials);
 
 export const verifyUser = token => {
   return get(`${AUTH_URL}/verify`, {
-    header: {
+    headers: {
       Authorization: token
     }
   });
