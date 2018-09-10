@@ -14,7 +14,7 @@ export function goals(state = [], { type, payload }) {
         payload
       ];
     case GOAL_UPDATE:
-      return state.map(goal => goal.id === payload.id ? payload : goal);
+      return state.map(goal => goal._id === payload._id ? payload : goal);
     default:
       return state;
   }
