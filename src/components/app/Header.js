@@ -24,12 +24,20 @@ class Header extends PureComponent {
       <header className={styles.header}>
         <nav className="page-name">
           <h1><NavLink exact to="/">Goal Mine</NavLink></h1>
+          <ul>
+            <li>
+              <NavLink to="/goals">My goals</NavLink>
+            </li>
+            <li>
+              <NavLink to="/users">Their goals</NavLink>
+            </li>
+          </ul>
           {user
             ? <NavLink to="/" onClick={this.handleLogout}>Logout</NavLink>
             : <NavLink to="/auth">Sign in</NavLink>
           }
         </nav>
-        { user && <span>Welcome {user.name}</span> }
+        { user && <span>Welcome, {user.name}</span> }
         <Error/>
       </header>
     );

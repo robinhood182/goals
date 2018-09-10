@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 class GoalDisplay extends PureComponent {
@@ -10,12 +10,12 @@ class GoalDisplay extends PureComponent {
     const { goal } = this.props;
     const { completed } = goal;
     return (
-      <section>
-        <p>{goal.goal}</p>
-        {completed &&
-          <p>Goal reached!</p>
-        }
-      </section>
+      <Fragment>
+        <p>{goal.goal}   {completed &&
+          <span>✅</span>
+        }</p>
+        
+      </Fragment>
     );
   }
 }

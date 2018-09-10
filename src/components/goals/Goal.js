@@ -19,16 +19,16 @@ class Goal extends PureComponent {
      this.setState(({ editing }) => ({ editing: !editing }));
    };
 
-   handleToggle = () => {
+   handleUpdate = () => {
      const { updateGoal, goal } = this.props;
      return updateGoal(goal._id);
    };
-   
+
    render() { 
      const { goal } = this.props;
      return (
        <li 
-         onClick={this.handleToggle}
+         onClick={this.handleUpdate}
          className={styles.goal}
        >
          <GoalDisplay goal={goal}/>
