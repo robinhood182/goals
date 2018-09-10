@@ -8,6 +8,7 @@ import Home from './Home';
 import Header from './Header';
 import Auth from '../auth/Auth';
 import Goals from '../goals/Goals';
+import Users from '../users/Users';
 import PrivateRoute from './PrivateRoute';
 import styles from './App.css';
 
@@ -35,6 +36,7 @@ class App extends PureComponent {
               <Route exact path="/" component={Home}/>
               <Route path="/auth" component={Auth}/>
               <PrivateRoute exact path="/goals" component={Goals}/>
+              <PrivateRoute exact path="/users" component={Users}/>
               <Redirect to="/"/>
             </Switch>
             }
